@@ -80,13 +80,13 @@ def buildTuple(commandString):
 
 
 	#get tokens
-	parsedCommand = parsedCommand(commandString)
+	parsedCommand = parseCommand(commandString)
 
 	#perform analysis
 	#get the verb, check to see if it exists in the dict, if it doesn't, return empty tuple, 
 	verbCommand = parsedCommand[0] 
 	if verbCommand in synonymsDictionary:
-		verbCommand = synonymsDictionary[verb]
+		verbCommand = synonymsDictionary[verbCommand]
 	else:
 		return tupleReturned
 
@@ -96,7 +96,7 @@ def buildTuple(commandString):
 	if prepositionCommand in synonymsDictionary:
 		prepositionCommand = synonymsDictionary[prepositionCommand]
 		#if verb in verbPrepositionCombos:
-		permittedPreps = verbPrepositionCombos[verb]
+		permittedPreps = verbPrepositionCombos[verbCommand]
 		if prepositionCommand not in permittedPreps:
 			return tupleReturned 
 	else:
@@ -108,7 +108,7 @@ def buildTuple(commandString):
 
 	#build the actual tuple and return it
 
-	tupleReturned = (verbCommand, prepositionCommand, objCommand)
+	tupleReturned = (verbCommand, prepositionCommand, objectCommand)
 	return tupleReturned
 
 
@@ -116,9 +116,9 @@ def main():
 	
 	buildSynonymDict()
 	commandTuple = ()
-	while all(commandTuple):
-		command = input("Your move: ")
-		commandTuple = buildTuple(commandString)
+	while not any(commandTuple):
+		command = raw_input("Your move: ")
+		commandTuple = buildTuple(command)
 	print commandTuple
 
 	
