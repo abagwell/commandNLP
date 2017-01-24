@@ -48,13 +48,20 @@ def buildSynonymDict():
 
 '''
 
+
+
 '''
 
 
 def parseCommand(commandString):
 
 	commandString = commandString.lower()
-	parsedCommand = commandString.split()
+	commandString = commandString.split()
+	for word in commandString:
+		word = word.strip('.,!;')
+
+	return commandString
+
 
 '''
 
@@ -68,16 +75,18 @@ def buildTuple(commandString):
 
 	tupleReturned = ()
 
+
 	#get tokens
 	parsedCommand = parsedCommand(commandString)
 
-	
 	#perform analysis
-		#get the verb, check to see if it exists in gameVerbs, if it doesn't look in synDic, If yes, match it, if no, exit
-		#get the preposition, check to see if exists. if it doesn't look in synonyms, if it doesn't exit, if it does
-		#look to see if the verb preposition combo is valid, if it is continue, if not return
-		#get the object 
-		# return tuple
+	for word in parsedCommand:
+
+	#get the verb, check to see if it exists in gameVerbs, if it doesn't look in synDic, If yes, match it, if no, exit
+	#get the preposition, check to see if exists. if it doesn't look in synonyms, if it doesn't exit, if it does
+	#look to see if the verb preposition combo is valid, if it is continue, if not return
+	#get the object 
+	#return tuple
 
 	#if can't build 
 	#return tuple
