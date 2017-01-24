@@ -9,7 +9,16 @@ gameVerbs = ["look", "take", "help", "inventory", "use",
 		"drop", "eat", "drink", "pull", "hit", "put", 
 		"savegame", "loadgame", "push", "wield", "wear"]
 
+gameVerbs = ["drink", "drop", "eat", "help", "hit", "inventory", "loadgame", "look", "pull", "push",
+"savegame", "take", "use", "wear", "wield"]
+
 prepositions = ["above", "at", "behind", "into", "on", "under", "with" ]
+
+gameObjects = [ "altar", "apple", "armor", "axe", "bearskin", "bed", "book", "books", "bones", "bottle", "chair", "chairs",
+                 "chandelier", "cloak", "desk", "dinnerware", "gem", "hearth", "helmet", "key", "key-rung", "knife",
+                 "lantern", "lever", "lockpick", "matches", "mattress", "mushrooms", "nightstand", "note",
+	  			"painting", "paintings", "ring", "rocks", "rug", "runes", "safe", "scroll", "shelf", "shelves", "sign", "stool",
+                 "stools", "sword", "table", "tables", "tapestries", "tools", "treasure", "tree", "trunk", "warhammer"]
 
 '''
 verbPrepositionCombos = {'look':['at', 'under', 'above', 'into', 'behind'], 'take': [], 
@@ -17,10 +26,10 @@ verbPrepositionCombos = {'look':['at', 'under', 'above', 'into', 'behind'], 'tak
 						'drink':[], 'pull': [], 'hit': [], 'put': [], 'hit': [], 'put': ['on', 'into', 'under', 'above', 'with'],
 						'push': ['on'], 'wield': [], 'wear': [],}
 '''
-verbPrepositionCombos = {gameVerbs[0]:['at', 'under', 'above', 'into', 'behind'], gameVerbs[1]: [], 
-						gameVerbs[2]:[], gameVerbs[3]: [], gameVerbs[4]: ['on', 'with'], gameVerbs[5] : [], gameVerbs[6]: [],
-						gameVerbs[7]:[], gameVerbs[8]: [], gameVerbs[9]: [], gameVerbs[10]: [], gameVerbs[11]: [], gameVerbs[12]: ['on', 'into', 'under', 'above', 'with'],
-						gameVerbs[13]: ['on'], gameVerbs[14]: [], gameVerbs[15]: [],}
+verbPrepositionCombos = {"look":['at', 'under', 'above', 'into', 'behind'], "take": [], 
+						"help":[], "inventory": [], "use": ['on', 'with'], "drop" : [], "eat": [],
+						"drink":[], "pull": [], "hit": [], "put": [], "hit": [], "put": ['on', 'into', 'under', 'above', 'with'],
+						"push": ['on'], "wield": [], "wear": [],}
 synonymsDictionary = {}
 
 '''
@@ -45,9 +54,14 @@ def buildSynonymDict():
 				word = word.strip(' \t\n\r')
 				synonymsDictionary[word] = verb
 
+'''
+
+'''
 
 
 def parseCommand(commandString):
+
+	commandString = commandString.lower()
 	parsedCommand = commandString.split()
 
 '''
@@ -63,6 +77,9 @@ def buildTuple(commandString):
 	tupleReturned = ()
 
 	#get tokens
+	parsedCommand = parsedCommand(commandString)
+
+	
 	#perform analysis
 		#get the verb, check to see if it exists in gameVerbs, if it doesn't look in synDic, If yes, match it, if no, exit
 		#get the preposition, check to see if exists. if it doesn't look in synonyms, if it doesn't exit, if it does
