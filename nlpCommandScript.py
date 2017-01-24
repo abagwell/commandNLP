@@ -38,7 +38,8 @@ def buildSynonymDict():
 
 	with open(synonymFilePath, 'r') as f:
 		for line in f:
-			verb, synonymList= line.split('—', 2)
+			splitLine = line.split('-')
+			verb, synonymList = splitLine
 			verb = verb.lower()
 			verb = verb.strip(' \t\n\r')
 			parsedSynonyms = synonymList.split(",")
@@ -49,6 +50,8 @@ def buildSynonymDict():
 '''
 
 Definition: parses command passed by user into tokens 
+
+Post Conditions: Returns 
 
 '''
 
@@ -84,7 +87,7 @@ def buildTuple(commandString):
 	verbCommand = parsedCommand[0] 
 	if verbCommand in synonymsDictionary:
 		verbCommand = synonymsDictionary[verb]
-	else
+	else:
 		return tupleReturned
 
 	#get the preposition, check to see if it exists in the dictionary, if so, check to see if pair with verb is valid
@@ -96,7 +99,7 @@ def buildTuple(commandString):
 		permittedPreps = verbPrepositionCombos[verb]
 		if prepositionCommand not in permittedPreps:
 			return tupleReturned 
-	else
+	else:
 		return tupleReturned
 
 	objectCommand = parsedCommand[2]
@@ -107,13 +110,13 @@ def buildTuple(commandString):
 
 	tupleReturned = (verbCommand, prepositionCommand, objCommand)
 	return tupleReturned
-	
+
 
 def main():
 	
 	buildSynonymDict()
 	commandTuple = ()
-	while not all(commandTuple):
+	while all(commandTuple):
 		command = input("Your move: ")
 		commandTuple = buildTuple(commandString)
 	print commandTuple
