@@ -5,9 +5,6 @@ import os
 import re
 
 cwd = os.getcwd()
-gameVerbs = ["look", "take", "help", "inventory", "use", 
-		"drop", "eat", "drink", "pull", "hit", "put", 
-		"savegame", "loadgame", "push", "wield", "wear"]
 
 gameVerbs = ["drink", "drop", "eat", "help", "hit", "inventory", "loadgame", "look", "pull", "push",
 "savegame", "take", "use", "wear", "wield"]
@@ -20,16 +17,11 @@ gameObjects = [ "altar", "apple", "armor", "axe", "bearskin", "bed", "book", "bo
 	  			"painting", "paintings", "ring", "rocks", "rug", "runes", "safe", "scroll", "shelf", "shelves", "sign", "stool",
                  "stools", "sword", "table", "tables", "tapestries", "tools", "treasure", "tree", "trunk", "warhammer"]
 
-'''
+
 verbPrepositionCombos = {'look':['at', 'under', 'above', 'into', 'behind'], 'take': [], 
 						'help': [], 'inventory': [], 'use': ['on', 'with'], 'drop' : [], 'eat': [],
 						'drink':[], 'pull': [], 'hit': [], 'put': [], 'hit': [], 'put': ['on', 'into', 'under', 'above', 'with'],
 						'push': ['on'], 'wield': [], 'wear': [],}
-'''
-verbPrepositionCombos = {"look":['at', 'under', 'above', 'into', 'behind'], "take": [], 
-						"help":[], "inventory": [], "use": ['on', 'with'], "drop" : [], "eat": [],
-						"drink":[], "pull": [], "hit": [], "put": [], "hit": [], "put": ['on', 'into', 'under', 'above', 'with'],
-						"push": ['on'], "wield": [], "wear": [],}
 synonymsDictionary = {}
 
 '''
