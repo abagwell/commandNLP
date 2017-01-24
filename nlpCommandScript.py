@@ -48,7 +48,7 @@ def buildSynonymDict():
 
 '''
 
-
+Definition: parses command passed by user into tokens 
 
 '''
 
@@ -80,17 +80,34 @@ def buildTuple(commandString):
 	parsedCommand = parsedCommand(commandString)
 
 	#perform analysis
-	for word in parsedCommand:
+	#get the verb, check to see if it exists in the dict, if it doesn't, return empty tuple, 
+	verbCommand = parsedCommand[0] 
+	if verbCommand in synonymsDictionary:
+		verbCommand = synonymsDictionary[verb]
+	else
+		return tupleReturned
 
-	#get the verb, check to see if it exists in gameVerbs, if it doesn't look in synDic, If yes, match it, if no, exit
-	#get the preposition, check to see if exists. if it doesn't look in synonyms, if it doesn't exit, if it does
-	#look to see if the verb preposition combo is valid, if it is continue, if not return
-	#get the object 
-	#return tuple
+	#get the preposition, check to see if it exists in the dictionary, if so, check to see if pair with verb is valid
 
-	#if can't build 
-	#return tuple
+	prepositionCommand = parsedCommand[1]
+	if prepositionCommand in synonymsDictionary:
+		prepositionCommand = synonymsDictionary[prepositionCommand]
+		#if verb in verbPrepositionCombos:
+		permittedPreps = verbPrepositionCombos[verb]
+		if prepositionCommand not in permittedPreps:
+			return tupleReturned 
+	else
+		return tupleReturned
 
+	objectCommand = parsedCommand[2]
+	if objectCommand not in gameObjects:
+		return tupleReturned
+
+	#build the actual tuple and return it
+
+	tupleReturned = (verbCommand, prepositionCommand, objCommand)
+	return tupleReturned
+	
 
 def main():
 	
