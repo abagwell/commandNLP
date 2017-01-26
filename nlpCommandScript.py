@@ -82,7 +82,6 @@ def buildTuple(commandString):
 	#get tokens
 	parsedCommand = parseCommand(commandString)
 
-	#perform analysis
 	#get the verb, check to see if it exists in the dict, if it doesn't, return empty tuple, 
 	verbCommand = parsedCommand[0] 
 	if verbCommand in synonymsDictionary:
@@ -92,17 +91,30 @@ def buildTuple(commandString):
 
 	#get the preposition, check to see if it exists in the dictionary, if so, check to see if pair with verb is valid
 
-	prepositionCommand = parsedCommand[1]
-	if prepositionCommand in synonymsDictionary:
-		prepositionCommand = synonymsDictionary[prepositionCommand]
-		#if verb in verbPrepositionCombos:
+	if len(parsedCommand) == 2:
+		prepositionCommand = None
 		permittedPreps = verbPrepositionCombos[verbCommand]
-		if prepositionCommand not in permittedPreps:
+		if any(permittedPreps):
 			return tupleReturned 
-	else:
-		return tupleReturned
 
-	objectCommand = parsedCommand[2]
+	else:
+		prepositionCommand = parsedCommand[1]
+		if prepositionCommand in synonymsDictionary:
+			prepositionCommand = synonymsDictionary[prepositionCommand]
+			#if verb in verbPrepositionCombos:
+			permittedPreps = verbPrepositionCombos[verbCommand]
+			if prepositionCommand not in permittedPreps:
+				return tupleReturned 
+		else:
+			return tupleReturned
+
+	#get the object 
+
+	if len(parsedCommand) == 2:
+		objectCommand = parsedCommand[1]
+	else:
+		objectCommand = parsedCommand[2]
+	
 	if objectCommand not in gameObjects:
 		return tupleReturned
 
@@ -113,12 +125,14 @@ def buildTuple(commandString):
 
 
 def main():
-	
+
 	buildSynonymDict()
 	commandTuple = ()
 	while not any(commandTuple):
 		command = raw_input("Your move: ")
 		commandTuple = buildTuple(command)
+		if not any(commandTuple):
+			print "I don't understand..."
 	print commandTuple
 
 	
