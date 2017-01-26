@@ -3,6 +3,9 @@
 
 import os
 import re
+import unittest
+
+TESTING = True
 
 cwd = os.getcwd()
 
@@ -19,14 +22,17 @@ gameObjects = [ "altar", "apple", "armor", "axe", "bearskin", "bed", "book", "bo
 
 
 verbPrepositionCombos = {'look':['at', 'under', 'above', 'into', 'behind'], 'take': [], 
-						'help': [], 'inventory': [], 'use': ['on', 'with'], 'drop' : [], 'eat': [],
+						'help': ['with'], 'inventory': [], 'use': ['on', 'with'], 'drop' : ['at', 'behind', 'into', 'on'], 'eat': [],
 						'drink':[], 'pull': [], 'hit': [], 'put': [], 'hit': [], 'put': ['on', 'into', 'under', 'above', 'with'],
 						'push': ['on'], 'wield': [], 'wear': [],}
 synonymsDictionary = {}
 
+
+
+
 '''
 
-Definition:
+Definition: builds the dictionary used to check if a command issued is synonymous with 
 
 '''
 
@@ -124,18 +130,43 @@ def buildTuple(commandString):
 	return tupleReturned
 
 
+'''
+Class used for unit Testing 
+
+'''
+
+def testBuildTuple(self):
+		assert(buildTuple("drink bottle")==('drink', None, 'bottle'))
+		assert (buildTuple("drop with armor")==())
+		assert (buildTuple("drop at bed")==('drop', 'at', 'bed'))
+		assert (buildTuple("eat under book")==())
+		assert(buildTuple("eat apple")==('eat', None, 'apple'))
+		assert(buildTuple("help hit bearskin")==())
+		assert(buildTuple("help with bones")==('help', 'with', 'bones'))
+
+
 def main():
 
-	buildSynonymDict()
-	commandTuple = ()
-	while not any(commandTuple):
-		command = raw_input("Your move: ")
-		commandTuple = buildTuple(command)
-		if not any(commandTuple):
-			print "I don't understand..."
-	print commandTuple
+	#if unit testing desired, no user interaction occurs...
+	if TESTING:
+		buildSynonymDict()
+		testBuildTuple()
+		
+	else:
 
+		buildSynonymDict()
+		commandTuple = ()
+		while not any(commandTuple):
+			command = raw_input("Your move: ")
+			commandTuple = buildTuple(command)
+			if not any(commandTuple):
+				print "I don't understand..."
+		print commandTuple
+		
 	
 
 if __name__ == '__main__':
-	main()
+	if TESTING:
+		unittest.main()
+	else:
+		main()
