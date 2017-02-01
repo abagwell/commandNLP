@@ -11,6 +11,7 @@ Destroy - destroy, ruin, demolish, raze, waste, kill, slay, end, extinguish
 Do - do, execute, enact, carry out, finish, conclude, effect, accomplish, achieve, attain
 Drink - drink, swallow, gulp, sip, chug
 Drop - drop, discard
+Eat - eat, grub, snack, munch 
 End - end, stop, finish, terminate, conclude, close, halt, cessation, discontinuance
 Explain - explain, elaborate, clarify, define, interpret, justify, account for
 Get - get, acquire, obtain, secure, procure, gain, fetch, find, score, accumulate, win, earn, rep, catch, net, bag, derive, collect, gather, glean, pick up, accept, come by, regain, salvage
